@@ -29,7 +29,8 @@ db_import_export_id <- function(db_table, #char string
   
   #Upload R object to files endpoint on Civis platform 
   #Returns ID for file to input to modeling job
-  civis::write_civis_file(x=save_path)
+  id <- civis::write_civis_file(x=save_path)
+  print(id)
   
   #Delete local csv file
   if (file.exists(save_path)) file.remove(save_path)
