@@ -26,11 +26,7 @@ rm(results)
   ###results_df should pass this section without any irrelevent DV/treatment mismatch
 ########################################################
 #Flag rows with treatment mismatch indicator
-results_df$trt_mismatch <- case_when(
-  grepl("nutcracker", results_df$dvs) & !(grepl("Nutcracker", results_df$treatment) | grepl("Control", results_df$treatment)) ~ 1,
-  grepl("marypoppins", results_df$dvs) & !(grepl("Mary", results_df$treatment) | grepl("Control", results_df$treatment)) ~ 1,
-  grepl("ralph", results_df$dvs) & !(grepl("Ralph", results_df$treatment) | grepl("Control", results_df$treatment)) ~ 1
-)
+
 
 #Remove rows with mismatch flag and omit mismatch flag column
 results_df %<>% 
@@ -68,8 +64,8 @@ rm(list = c('control_df','results_df','treated_df'))
   ###USER specifies db and cluster for survey load
 ############################
 #Load original table of survey responses using Civis API
-db_table <- "psb.disney_msgtestr_train" #USER
-cluster <- "redshift-media" #USER
+db_table <-  #USER
+cluster <-  #USER
 survey_df <- civis::read_civis(x=db_table, database=cluster)
 
 #Create collection of all unique subgroups
@@ -83,14 +79,11 @@ overall_skip <- which(ate_df$subgroup_label == "overall")
 
 #Overall counts
 #THIS WILL VARY WITH OTHER APPLICATIONS
-trt_overall_counts <- plyr::count(survey_df, "treatment_group")
-nut_count <- trt_overall_counts$freq[3]
-ralph_count <- trt_overall_counts$freq[4]
-mp_count <- trt_overall_counts$freq[2]
+
 
 #update skipped overall counts
 #THIS WILL VARY WITH OTHER APPLICATIONS
-counts[overall_skip] <- c(nut_count, ralph_count, mp_count, nut_count, ralph_count, mp_count)
+counts[overall_skip] <- ###
 
 #iterate through all unique subgroup/treatment combos (except overall) and count membership
 for(s in 1:nrow(subgroups)) {
