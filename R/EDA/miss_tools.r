@@ -9,6 +9,7 @@ miss_count <- function(df) {
     apply(MARGIN = 2, sum) %>%
     sort(decreasing = TRUE)
   
+  return(miss_df)
 }
 
 miss_mean <- function(df) {
@@ -16,4 +17,6 @@ miss_mean <- function(df) {
     is.na() %>%
     apply(MARGIN = 2, mean) %>%
     sort(decreasing = TRUE)
+
+  return(miss_df)  
 }
