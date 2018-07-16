@@ -16,11 +16,8 @@ ggplot_missing <- function(x){
            aes(x = Var2,
                y = Var1)) +
     geom_raster(aes(fill = value)) +
-    scale_fill_manual(values = plot_colors) +
-    #scale_fill_grey(name = "",
-    #                labels = c("Present","Missing")) +
+    scale_fill_manual(values = plot_colors,
+                      labels = c("Present","Missing")) +
     theme_fivethirtyeight() + 
-    theme(axis.text.x  = element_text(angle=45, vjust=0.5)) + 
-    labs(x = "Variables in Dataset",
-         y = "Rows / observations")
+    theme(axis.text.x  = element_text(angle=90, vjust=0.5)) 
 }
