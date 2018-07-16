@@ -12,11 +12,17 @@ miss_count <- function(df) {
   return(miss_df)
 }
 
-miss_mean <- function(df) {
+miss_mean <- function(df, 
+                      percent = TRUE) {
   miss_df <- df %>% 
     is.na() %>%
     apply(MARGIN = 2, mean) %>%
-    sort(decreasing = TRUE)
+    sort(decreasing = TRUE) %>%
+    round(4)
+    
+  if(percent == TRUE) {
+    miss_df %<>% scales::percent()
+  }
 
   return(miss_df)  
 }
